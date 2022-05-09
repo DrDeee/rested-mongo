@@ -4,7 +4,7 @@ import (
 	"regexp"
 	"testing"
 
-	"github.com/clarify/rested/storers/mongo"
+	mongo "github.com/drdeee/rested-mongo"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 

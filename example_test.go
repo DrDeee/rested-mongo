@@ -10,7 +10,7 @@ import (
 	"github.com/clarify/rested/resource"
 	"github.com/clarify/rested/rest"
 	"github.com/clarify/rested/schema"
-	mgo "github.com/clarify/rested/storers/mongo"
+	mgo "github.com/drdeee/rested-mongo"
 	"github.com/rs/cors"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"

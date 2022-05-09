@@ -1,3 +1,5 @@
+github.com/clarify/rested v0.1.4 h1:38LHX76JmZ6T8SoVK7W0gIMgiJ3x6/3POpte9V7W7P8=
+github.com/clarify/rested v0.1.4/go.mod h1:/Gu++9Hs43kkZgupAqG9MwedmF8L+1iwjygh4nrm+A0=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=

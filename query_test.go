@@ -8,7 +8,7 @@ import (
 	"github.com/clarify/rested/resource"
 	"github.com/clarify/rested/schema"
 	"github.com/clarify/rested/schema/query"
-	"gopkg.in/mgo.v2/bson"
+	"go.mongodb.org/mongo-driver/bson"
 )
 
 type UnsupportedExpression struct{}
