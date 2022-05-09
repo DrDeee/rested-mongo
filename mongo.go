@@ -239,7 +239,7 @@ func (m Handler) Find(ctx context.Context, q *query.Query) (*resource.ItemList, 
 		return nil, err
 	}
 	srt := getSort(q)
-	srt = applyWindow(srt, *q.Window)
+	// srt = applyWindow(srt, *q.Window)
 
 	c, err := m(ctx)
 	if err != nil {
