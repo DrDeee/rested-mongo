@@ -114,7 +114,9 @@ func (m Handler) Update(ctx context.Context, item *resource.Item, original *reso
 	} else {
 		s["_etag"] = original.ETag
 	}
-	_, err = c.UpdateByID(ctx, original.ID, mItem)
+	_, err = c.UpdateByID(ctx, original.ID, bson.M{
+		"$set": mItem,
+	})
 	if err == mongo.ErrNoDocuments {
 		// Determine if the item is not found or if the item is found but etag missmatch
 		var object interface{}
@@ -239,7 +241,7 @@ func (m Handler) Find(ctx context.Context, q *query.Query) (*resource.ItemList, 
 		return nil, err
 	}
 	srt := getSort(q)
-	// srt = applyWindow(srt, *q.Window)
+	applyWindow(*srt, *q.Window)
 
 	c, err := m(ctx)
 	if err != nil {
