@@ -9,9 +9,8 @@ import (
 
 	"github.com/clarify/rested/resource"
 	"github.com/clarify/rested/schema/query"
-	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
+	"gopkg.in/mgo.v2/bson"
 )
 
 // mongoItem is a bson representation of a resource.Item.
@@ -56,7 +55,7 @@ func newItem(i *mongoItem) *resource.Item {
 	}
 
 	if item.ETag == "" {
-		if v, ok := i.ID.(primitive.ObjectID); ok {
+		if v, ok := i.ID.(bson.ObjectId); ok {
 			item.ETag = "p-" + v.Hex()
 		} else {
 			item.ETag = "p-" + fmt.Sprint(i.ID)
