@@ -190,7 +190,7 @@ func (m Handler) Clear(ctx context.Context, q *query.Query) (int, error) {
 		// IDs is larger than the maximum BSON document size in MongoDB:
 		// https://docs.mongodb.com/manual/reference/limits/#bson-documents
 		options := getSort(q)
-		applyWindow(options, q.Window)
+		options = applyWindow(options, q.Window)
 		options = options.SetProjection(bson.M{"_id": 1})
 
 		request, err := c.Find(ctx, qry, options)
@@ -239,7 +239,7 @@ func (m Handler) Find(ctx context.Context, q *query.Query) (*resource.ItemList, 
 		return nil, err
 	}
 	srt := getSort(q)
-	// srt = applyWindow(srt, *q.Window)
+	srt = applyWindow(srt, q.Window)
 
 	c, err := m(ctx)
 	if err != nil {
