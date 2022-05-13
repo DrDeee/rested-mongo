@@ -83,7 +83,7 @@ func (v Time) parse(value interface{}) (interface{}, error) {
 			}
 		}
 	}
-	if dateTime, ok := value.(primitive.DateTime); !ok {
+	if dateTime, ok := value.(primitive.DateTime); ok {
 		return dateTime.Time(), nil
 	}
 	if _, ok := value.(time.Time); !ok {
