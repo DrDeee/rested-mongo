@@ -105,6 +105,9 @@ func (v Time) Validate(value interface{}) (interface{}, error) {
 func (v Time) get(value interface{}) (time.Time, error) {
 	t, ok := value.(time.Time)
 	if !ok {
+		if dt, ok := value.(primitive.DateTime); ok {
+			return dt.Time(), nil
+		}
 		return t, errors.New("not a time")
 	}
 	return t, nil
