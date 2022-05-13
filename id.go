@@ -6,6 +6,7 @@ import (
 	"fmt"
 
 	"github.com/clarify/rested/schema"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"gopkg.in/mgo.v2/bson"
 )
 
@@ -55,11 +56,16 @@ func (v ObjectID) Validate(value interface{}) (interface{}, error) {
 
 // Serialize implements FieldSerializer interface
 func (v ObjectID) Serialize(value interface{}) (interface{}, error) {
-	id, ok := value.(bson.ObjectId)
+	id, ok := value.(primitive.ObjectID)
 	if !ok {
-		return nil, errors.New("not an ObjectId")
+		id, ok := value.(bson.ObjectId)
+		if !ok {
+			return nil, errors.New("not an ObjectId")
+		}
+		return id.Hex(), nil
 	}
 	return id.Hex(), nil
+
 }
 
 // BuildJSONSchema implements the jsonschema.Builder interface.
