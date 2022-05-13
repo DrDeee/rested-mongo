@@ -47,20 +47,20 @@ func (v ObjectID) Validate(value interface{}) (interface{}, error) {
 	if len(s) != 24 {
 		return nil, errors.New("invalid object id length")
 	}
-	if _, err := primitive.ObjectIDFromHex(s); err != nil {
+	if id, err := primitive.ObjectIDFromHex(s); err != nil {
 		return nil, fmt.Errorf("invalid object id")
 	} else {
-		return value, nil
+		return id, nil
 	}
 }
 
 // Serialize implements FieldSerializer interface
 func (v ObjectID) Serialize(value interface{}) (interface{}, error) {
-	id, ok := value.(primitive.ObjectID)
-	if !ok {
+	id, err := v.Validate(value)
+	if err != nil {
 		return nil, errors.New("not an ObjectId")
 	}
-	return id.Hex(), nil
+	return id.(primitive.ObjectID).Hex(), nil
 }
 
 // BuildJSONSchema implements the jsonschema.Builder interface.
