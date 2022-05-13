@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	mongo "github.com/drdeee/rested-mongo"
-	"go.mongodb.org/mongo-driver/bson/primitive"
+	"gopkg.in/mgo.v2/bson"
 )
 
 const (
@@ -17,7 +17,7 @@ func TestObjectIDValidate(t *testing.T) {
 	v := &mongo.ObjectID{}
 
 	t.Run("validObjectID", func(t *testing.T) {
-		expect, _ := primitive.ObjectIDFromHex(validObjectID)
+		expect := bson.ObjectIdHex(validObjectID)
 		id, err := v.Validate(validObjectID)
 		if expect != id {
 			t.Errorf("v.Validate(validObjectID):\n %v (expect) != %v (actual)", expect, id)

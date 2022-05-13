@@ -5,9 +5,9 @@ import (
 
 	"github.com/clarify/rested/resource"
 	"github.com/clarify/rested/schema/query"
-	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	"gopkg.in/mgo.v2/bson"
 )
 
 // getField translate a schema field into a MongoDB field:
