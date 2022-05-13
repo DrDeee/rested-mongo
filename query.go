@@ -44,12 +44,12 @@ func getSort(q *query.Query) *options.FindOptions {
 	return options
 }
 
-func applyWindow(mq options.FindOptions, w query.Window) {
+func applyWindow(mq *options.FindOptions, w *query.Window) {
 	if w.Offset > 0 {
-		mq = *mq.SetSkip(int64(w.Offset))
+		mq = mq.SetSkip(int64(w.Offset))
 	}
 	if w.Limit > -1 {
-		mq = *mq.SetLimit(int64(w.Limit))
+		mq = mq.SetLimit(int64(w.Limit))
 	}
 }
 
