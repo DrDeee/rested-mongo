@@ -262,17 +262,12 @@ func (m Handler) Find(ctx context.Context, q *query.Query) (*resource.ItemList, 
 		Items: []*resource.Item{},
 	}
 
-	var mItem mongoItem
-	for mq.Next(ctx) {
-		err := mq.Decode(&mItem)
-		// Check if context is still ok before to continue
-		if err != nil {
-			// TODO bench this as net/context is using mutex under the hood
-			mq.Close(ctx)
-			return nil, err
-		}
-		list.Items = append(list.Items, newItem(&mItem))
+	var items []mongoItem
+	mq.All(ctx, &items)
+	for _, item := range items {
+		list.Items = append(list.Items, newItem(&item))
 	}
+
 	if err := mq.Close(ctx); err != nil {
 		return nil, err
 	}

@@ -38,7 +38,7 @@ type ObjectID struct{}
 func (v ObjectID) Validate(value interface{}) (interface{}, error) {
 	id, ok := value.(primitive.ObjectID)
 	if ok {
-		return id, nil
+		return id.Hex(), nil
 	}
 	s, ok := value.(string)
 	if !ok {
@@ -47,7 +47,7 @@ func (v ObjectID) Validate(value interface{}) (interface{}, error) {
 	if id, err := primitive.ObjectIDFromHex(s); err != nil {
 		return nil, fmt.Errorf("invalid object id")
 	} else {
-		return id, nil
+		return id.Hex(), nil
 	}
 }
 
