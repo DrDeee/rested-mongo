@@ -27,7 +27,7 @@ func newMongoItem(i *resource.Item) *mongoItem {
 	// Filter out id from the payload so we don't store it twice
 	p := map[string]interface{}{}
 	for k, v := range i.Payload {
-		if k != "id" {
+		if k != "id" && v != nil {
 			p[k] = v
 		}
 	}
@@ -114,9 +114,19 @@ func (m Handler) Update(ctx context.Context, item *resource.Item, original *reso
 	} else {
 		s["_etag"] = original.ETag
 	}
+
+	unset := bson.M{}
+	for k, v := range original.Payload {
+		if v == nil {
+			unset[k] = ""
+		}
+	}
+
 	_, err = c.UpdateByID(ctx, original.ID, bson.M{
-		"$set": mItem,
+		"$set":   mItem,
+		"$unset": unset,
 	})
+
 	if err == mongo.ErrNoDocuments {
 		// Determine if the item is not found or if the item is found but etag missmatch
 		var object interface{}
